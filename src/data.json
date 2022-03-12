@@ -1,0 +1,42 @@
+[
+  {
+    "id": "linseed",
+    "scale": 2,
+    "name": {
+      "en": "Linseed",
+      "de": "Leinsaat"
+    }
+  },
+  {
+    "id": "sunflower_seed",
+    "scale": 0.5,
+    "name": {
+      "en": "Sunflower seed",
+      "de": "Sonnenblumenkerne"
+    }
+  },
+  {
+    "id": "oats",
+    "scale": 1,
+    "name": {
+      "en": "Oats",
+      "de": "Haferflocken"
+    }
+  },
+  {
+    "id": "sesame_seed",
+    "scale": 0.5,
+    "name": {
+      "en": "Sesame seed",
+      "de": "Sesamsaat"
+    }
+  },
+  {
+    "id": "pumpkin_seed",
+    "scale": 0.5,
+    "name": {
+      "en": "Pumpkin seed",
+      "de": "Kürbiskerne"
+    }
+  }
+]
