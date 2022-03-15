@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 code {
@@ -14,4 +15,47 @@ code {
 
 ul {
   margin: 0;
+}
+
+input {
+  padding: 0.5em;
+}
+
+/* UI utils */
+
+.d-flex {
+  display: flex;
+}
+.d-flex.column {
+  flex-direction: column;
+}
+.d-flex.wrap {
+  flex-wrap: wrap;
+}
+
+.d-flex.align-start {
+  align-items: flex-start;
+}
+.d-flex.gap-m > :not(:last-child) {
+  margin-right: 1em;
+}
+
+td,
+th {
+  padding: 0.2em;
+}
+
+table.borders,
+table.borders th,
+table.borders td {
+  border: 1px solid;
+}
+
+table.borders {
+  border-collapse: collapse;
+}
+
+table.zebra tr:nth-child(even) td:not([rowspan]) {
+  background-color: #f1f8ff;
+  color: #282c34;
 }

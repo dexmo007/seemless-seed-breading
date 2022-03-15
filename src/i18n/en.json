@@ -1,0 +1,26 @@
+{
+  "translation": {
+    "intro": "Eases the calculation weights of seeds and water for the soaker of seeded bread loafs."
+  },
+  "seeds": {
+    "linseed": "Linseed",
+    "sunflower_seed": "Sunflower seed",
+    "oats": "Oats",
+    "sesame_seed": "Sesame seed",
+    "pumpkin_seed": "Pumpkin seed",
+    "hazelnuts": "Hazelnuts",
+    "almonds": "Almonds",
+    "walnuts": "Walnuts",
+    "buckwheat": "Buckwheat",
+    "shredded_spelt": "Shredded spelt",
+    "semolina": "Semolina",
+    "quinoa": "Quinoa",
+    "shredded_rye": "Shredded rye",
+    "soy": "Soy",
+    "shredded_wheat": "Shredded wheat",
+    "cornmeal": "Cornmeal",
+    "shredded_linseed": "Linseed (shredded)",
+    "roasted_finely_ground_left_over_bread": "Left-over bread (roasted, finely ground)",
+    "wheat_bran": "Wheat bran"
+  }
+}

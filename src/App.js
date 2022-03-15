@@ -1,15 +1,24 @@
 import { createWorkerFactory, useWorker } from '@shopify/react-web-worker';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import './App.css';
 
-import data from './data.json';
+import db from './db.json';
 import useIsMountedRef from './lib/hooks/use-is-mounted';
 
 const createWorker = createWorkerFactory(() => import('./engine.worker'));
 
+function Num({ value }) {
+  const rounded = Math.round(value * 100) / 100;
+  if (rounded === value) {
+    return value;
+  }
+  return `~ ${rounded}`;
+}
+
 function AllEqualPartsResult({ value }) {
   return (
-    <table>
+    <table className="borders">
       <thead>
         <tr>
           <th></th>
@@ -22,9 +31,15 @@ function AllEqualPartsResult({ value }) {
         <tbody>
           <tr>
             <th>Exact</th>
-            <td>{value.exact.seeds}</td>
-            <td>{value.exact.water}</td>
-            <td>{value.exact.soaker}</td>
+            <td>
+              <Num value={value.exact.seeds} />
+            </td>
+            <td>
+              <Num value={value.exact.water} />
+            </td>
+            <td>
+              <Num value={value.exact.soaker} />
+            </td>
           </tr>
           <tr>
             <th>Floor</th>
@@ -45,12 +60,11 @@ function AllEqualPartsResult({ value }) {
 }
 
 function App() {
+  const { t } = useTranslation();
   const mounted = useIsMountedRef();
   const worker = useWorker(createWorker);
 
   const [seeds, setSeeds] = useState([]);
-  const remove = (id) => () =>
-    setSeeds(seeds.filter(({ seed }) => seed.id !== id));
 
   const [soakerWeight, setSoakerWeight] = useState(null);
   const [result, setResult] = useState(null);
@@ -80,50 +94,73 @@ function App() {
   // }, [worker, seeds, soakerWeight, mounted]);
   return (
     <div className="App">
-      <h2>Available</h2>
-      <ul>
-        {data.map(({ id, scale, name }) => (
-          <li key={id}>
-            {name.en}: {scale}
-          </li>
+      <header>
+        <h1>Seeded</h1>
+        <p>
+          <i>{t('intro')}</i>
+        </p>
+      </header>
+      <h2>Choose your seeds</h2>
+      <div className="d-flex wrap gap-m">
+        {db.map(({ scale, ids }) => (
+          <div key={scale}>
+            <span style={{ display: 'inline-block', margin: '0.3em 0' }}>
+              <strong>x {scale}</strong>
+            </span>
+            <div className="d-flex column align-start">
+              {ids.map((id) => (
+                <div key={id}>
+                  <input
+                    id={`checkbox-${id}`}
+                    type="checkbox"
+                    value={id}
+                    checked={seeds.includes(id)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setSeeds([...seeds, id]);
+                      } else {
+                        setSeeds(seeds.filter((thatId) => id !== thatId));
+                      }
+                    }}
+                    style={{ verticalAlign: 'top' }}
+                  ></input>
+                  <label
+                    htmlFor={`checkbox-${id}`}
+                    style={{
+                      display: 'inline-block',
+                      maxWidth: '20ch',
+                      textAlign: 'left',
+                    }}
+                  >
+                    {t(id, { ns: 'seeds' })}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
         ))}
-      </ul>
-      <h2>Chosen</h2>
-      <ul>
-        {seeds.map(({ seed }) => (
-          <li key={seed.id}>
-            {seed.name.en}
-            <button onClick={remove(seed.id)}>X</button>
-          </li>
-        ))}
-      </ul>
-      <select
-        onChange={(e) =>
-          setSeeds([
-            ...seeds,
-            { seed: data.find((seed) => seed.id === e.target.value) },
-          ])
-        }
-      >
-        <option value="null">---</option>
-        {data
-          .filter(({ id }) => !seeds.find(({ seed }) => seed.id === id))
-          .map(({ id, name }) => (
-            <option key={id} value={id}>
-              {name.en}
-            </option>
-          ))}
-      </select>
-      <label htmlFor="input-soaker-weight">Targeted soaker weight</label>
-      <input
-        id="input-soaker-weight"
-        value={soakerWeight || ''}
-        type="number"
-        onChange={(e) => setSoakerWeight(parseFloat(e.target.value))}
-      ></input>
-      <button type="button" onClick={calc}>
-        Calculate
-      </button>
+      </div>
+      <div>
+        <label htmlFor="input-soaker-weight">
+          <h2>Targeted soaker weight</h2>
+        </label>
+        <input
+          id="input-soaker-weight"
+          value={soakerWeight || ''}
+          type="number"
+          onChange={(e) => setSoakerWeight(parseFloat(e.target.value))}
+        ></input>
+        <span> g</span>
+      </div>
+      <div style={{ padding: '1em' }}>
+        <button
+          type="button"
+          onClick={calc}
+          style={{ padding: '.2em .6em', fontSize: '1.5em' }}
+        >
+          Calculate
+        </button>
+      </div>
       <h2>Contents</h2>
       <div>
         <h3>All equal parts</h3>
@@ -136,12 +173,12 @@ function App() {
             Found {result.round.solutionCount} out of {result.round.runs}{' '}
             possibilities (took {result.round.duration / 1000}s)
           </span>
-          <table>
+          <table className="borders zebra">
             <thead>
               <tr>
                 {[
                   'Rank',
-                  ...seeds.map(({ seed }) => seed.name.en),
+                  ...seeds.map((id) => t(id, { ns: 'seeds' })),
                   'Water',
                 ].map((name, i) => (
                   <th key={i}>{name}</th>
@@ -151,7 +188,9 @@ function App() {
             <tbody>
               {result.round.solutions.map((solution, i) => (
                 <tr key={i}>
-                  <td>{solution.rank}</td>
+                  {solution.indexInRank === 0 && (
+                    <td rowSpan={solution.rankSize}>{solution.rank}</td>
+                  )}
                   {solution.weights.map((w, i) => (
                     <td key={i}>{w}</td>
                   ))}
@@ -160,6 +199,7 @@ function App() {
               ))}
             </tbody>
           </table>
+          <footer style={{ minHeight: '20px' }}></footer>
         </div>
       )}
     </div>

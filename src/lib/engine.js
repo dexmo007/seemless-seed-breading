@@ -42,7 +42,7 @@ export function calculateAll(
       }
       return;
     }
-    let i = 0;
+    let i = 1;
     const seed = seeds[0];
     const rest = seeds.slice(1);
     while ((seed.scale + 1) * i * options.steps <= target) {
@@ -62,23 +62,31 @@ export function calculateAll(
       .sort(({ sigma: a }, { sigma: b }) => a - b);
     rankedSolutions = rankedSolutions.slice(0, options.solutions);
     rankedSolutions.forEach((current, i) => {
-      console.log(current.weights, scales);
       current.water = current.weights.reduce(
         (acc, cur, i) => acc + cur * scales[i],
         0
       );
       if (i === 0) {
         current.rank = 1;
+        current.indexInRank = 0;
         return;
       }
       const previous = rankedSolutions[i - 1];
       if (current.sigma > previous.sigma) {
         current.rank = previous.rank + 1;
+        current.indexInRank = 0;
       } else {
         current.rank = previous.rank;
+        current.indexInRank = previous.indexInRank + 1;
       }
     });
-    // rankedSolutions.slice(0, 20).forEach((sol) => console.log(sol));
+    const rankSizes = rankedSolutions.reduce((acc, cur) => {
+      acc[cur.rank] = (acc[cur.rank] || 0) + 1;
+      return acc;
+    }, {});
+    rankedSolutions.forEach((e) => {
+      e.rankSize = rankSizes[e.rank];
+    });
   }
   const duration = Date.now() - started;
   return {

@@ -1,0 +1,38 @@
+[
+  {
+    "scale": 0.5,
+    "ids": [
+      "hazelnuts",
+      "pumpkin_seed",
+      "almonds",
+      "sesame_seed",
+      "sunflower_seed",
+      "walnuts"
+    ]
+  },
+  {
+    "scale": 1,
+    "ids": [
+      "buckwheat",
+      "shredded_spelt",
+      "oats",
+      "semolina",
+      "quinoa",
+      "shredded_rye",
+      "soy",
+      "shredded_wheat"
+    ]
+  },
+  {
+    "scale": 1.5,
+    "ids": ["linseed", "cornmeal"]
+  },
+  {
+    "scale": 2,
+    "ids": [
+      "shredded_linseed",
+      "roasted_finely_ground_left_over_bread",
+      "wheat_bran"
+    ]
+  }
+]

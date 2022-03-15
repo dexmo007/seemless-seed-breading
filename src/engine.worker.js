@@ -1,4 +1,5 @@
 import { calculateAllEqualParts, calculateAll } from './lib/engine';
+import db from './db.json';
 
 export function calculateWeights({ seeds, soakerWeight }) {
   if (!seeds || !soakerWeight) {
@@ -6,15 +7,13 @@ export function calculateWeights({ seeds, soakerWeight }) {
       'invalid message: ' + JSON.stringify({ seeds, soakerWeight })
     );
   }
-  const allEqualPartsResult = calculateAllEqualParts(
-    seeds.map(({ seed }) => seed),
-    soakerWeight
-  );
+  const seedData = seeds.map((id) => ({
+    id,
+    scale: db.find(({ ids }) => ids.includes(id)).scale,
+  }));
+  const allEqualPartsResult = calculateAllEqualParts(seedData, soakerWeight);
   return {
     allEqualParts: allEqualPartsResult,
-    round: calculateAll(
-      seeds.map(({ seed }) => seed),
-      soakerWeight
-    ),
+    round: calculateAll(seedData, soakerWeight),
   };
 }
