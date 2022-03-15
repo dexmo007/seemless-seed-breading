@@ -91,6 +91,7 @@ export function calculateAll(
   const duration = Date.now() - started;
   return {
     runs: counter,
+    seeds: seeds.map(({ id }) => id),
     solutionCount: solutions.length,
     solutions: rankedSolutions,
     duration,
