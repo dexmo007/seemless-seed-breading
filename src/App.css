@@ -8,3 +8,9 @@
   flex-direction: column;
   align-items: center;
 }
+.LanguageSelector.flag {
+  cursor: pointer;
+}
+.LanguageSelector.flag:not(:last-child) {
+  margin-right: 0.4em;
+}

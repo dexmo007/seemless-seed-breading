@@ -8,6 +8,7 @@ import useIsMountedRef from './lib/hooks/use-is-mounted';
 import AllEqualPartsResult from './components/AllEqualPartsResult';
 import SolutionsResult from './components/SolutionsResult';
 import objectHash from 'object-hash';
+import LanguageSelector from './components/LanguageSelector';
 
 const createWorker = createWorkerFactory(() => import('./engine.worker'));
 
@@ -41,13 +42,7 @@ function App() {
         <p>
           <i>{t('intro')}</i>
         </p>
-        <button
-          onClick={() => {
-            i18n.changeLanguage(i18n.language === 'de' ? 'en' : 'de');
-          }}
-        >
-          Toggle language
-        </button>
+        <LanguageSelector />
       </header>
       <h2>{t('chooseSeeds')}</h2>
       <div className="d-flex wrap gap-m">

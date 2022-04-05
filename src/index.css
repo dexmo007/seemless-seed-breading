@@ -59,3 +59,7 @@ table.zebra tr:nth-child(even) td:not([rowspan]) {
   background-color: #f1f8ff;
   color: #282c34;
 }
+
+i[role='img'] {
+  font-style: normal;
+}
