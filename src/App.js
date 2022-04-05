@@ -1,5 +1,5 @@
 import { createWorkerFactory, useWorker } from '@shopify/react-web-worker';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import './App.css';
 
