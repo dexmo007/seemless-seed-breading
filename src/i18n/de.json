@@ -1,5 +1,24 @@
 {
-  "translation": {},
+  "translation": {
+    "intro": "Vereinfacht die Berechnung der benötigten Gewichte von Saaten und Wasser für Quellstücke von Saatenbroten.",
+    "chooseSeeds": "Wähle deine Saaten",
+    "targetedSoakerWeight": "Zielgewicht des Quellstücks",
+    "calculate": "Berechnen",
+    "seeds": "Saaten",
+    "water": "Wasser",
+    "soaker": "Quellstück"
+  },
+  "allEqualParts": {
+    "title": "Gleiche Anteile",
+    "exact": "Genau",
+    "floor": "Abgerundet",
+    "ceil": "Aufgerundet"
+  },
+  "solutions": {
+    "title": "Schöne runde Ergebnisse",
+    "rank": "Rang",
+    "resultQuantification": "{{solutions}} Lösungen aus {{possibilities}} Möglichkeiten wurden gefunden (nach {{duration}}s)"
+  },
   "seeds": {
     "linseed": "Leinsaat",
     "sunflower_seed": "Sonnenblumenkerne",

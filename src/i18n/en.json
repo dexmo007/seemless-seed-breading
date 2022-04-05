@@ -1,6 +1,23 @@
 {
   "translation": {
-    "intro": "Eases the calculation weights of seeds and water for the soaker of seeded bread loafs."
+    "intro": "Eases the calculation weights of seeds and water for the soaker of seeded bread loafs.",
+    "chooseSeeds": "Choose your seeds",
+    "targetedSoakerWeight": "Targeted soaker weight",
+    "calculate": "Calculate",
+    "seeds": "Seeds",
+    "water": "Water",
+    "soaker": "Soaker"
+  },
+  "allEqualParts": {
+    "title": "All equals parts",
+    "exact": "Exact",
+    "floor": "Floor",
+    "ceil": "Ceil"
+  },
+  "solutions": {
+    "title": "Nice & Round Solutions",
+    "rank": "Rank",
+    "resultQuantification": "Found {{solutions}} out of {{possibilities}} possibilities (took {{duration}}s)"
   },
   "seeds": {
     "linseed": "Linseed",

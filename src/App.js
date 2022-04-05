@@ -34,19 +34,6 @@ function App() {
       setResult(result);
     }
   }
-
-  // useEffect(() => {
-  //   if (seeds.length === 0 || !soakerWeight) {
-  //     return;
-  //   }
-  //   (async () => {
-  //     const result = await worker.calculateWeights({ seeds, soakerWeight });
-  //     console.log('got result', result);
-  //     if (mounted) {
-  //       setResult(result);
-  //     }
-  //   })();
-  // }, [worker, seeds, soakerWeight, mounted]);
   return (
     <div className="App">
       <header>
@@ -62,7 +49,7 @@ function App() {
           Toggle language
         </button>
       </header>
-      <h2>Choose your seeds</h2>
+      <h2>{t('chooseSeeds')}</h2>
       <div className="d-flex wrap gap-m">
         {db.map(({ scale, ids }) => (
           <div key={scale}>
@@ -104,7 +91,7 @@ function App() {
       </div>
       <div>
         <label htmlFor="input-soaker-weight">
-          <h2>Targeted soaker weight</h2>
+          <h2>{t('targetedSoakerWeight')}</h2>
         </label>
         <input
           id="input-soaker-weight"
@@ -120,12 +107,11 @@ function App() {
           onClick={calc}
           style={{ padding: '.2em .6em', fontSize: '1.5em' }}
         >
-          Calculate
+          {t('calculate')}
         </button>
       </div>
       {result && hash === result.hash && (
         <>
-          <h2>Contents</h2>
           <AllEqualPartsResult value={result.allEqualParts} />
           <SolutionsResult value={result.round} />
           <footer style={{ minHeight: '20px' }}></footer>

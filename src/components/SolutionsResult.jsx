@@ -1,21 +1,23 @@
 import { useTranslation } from 'react-i18next';
 
 export default function SolutionsResult({ value }) {
-  const { t } = useTranslation();
+  const { t } = useTranslation('solutions');
   return (
     <div>
-      <h3>Nice &amp; Round Solutions</h3>
+      <h3>{t('title')}</h3>
       <span>
-        Found {value.solutionCount} out of {value.runs} possibilities (took{' '}
-        {value.duration / 1000}s)
+      {t('resultQuantification', {solutions: value.solutionCount,
+        possibilities:value.runs,
+        duration: value.duration / 1000
+      })}
       </span>
       <table className="borders zebra">
         <thead>
           <tr>
             {[
-              'Rank',
+              t('rank'),
               ...value.seeds.map((id) => t(id, { ns: 'seeds' })),
-              'Water',
+              t('translation:water'),
             ].map((name, i) => (
               <th key={i}>{name}</th>
             ))}
