@@ -13,7 +13,7 @@ import LanguageSelector from './components/LanguageSelector';
 const createWorker = createWorkerFactory(() => import('./engine.worker'));
 
 function App() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const mounted = useIsMountedRef();
   const worker = useWorker(createWorker);
 
