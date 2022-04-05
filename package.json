@@ -2,6 +2,7 @@
   "name": "seemless-seed-breading",
   "version": "0.1.0",
   "private": true,
+  "homepage": "",
   "dependencies": {
     "@shopify/react-web-worker": "^4.0.10",
     "@testing-library/jest-dom": "^5.16.3",
