@@ -30,7 +30,6 @@ function App() {
       return;
     }
     const result = await worker.calculateWeights({ hash, seeds, soakerWeight });
-    console.log('got result', result);
     if (mounted) {
       setResult(result);
     }
