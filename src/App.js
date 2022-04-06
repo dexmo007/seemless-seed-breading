@@ -44,7 +44,7 @@ function App() {
         <LanguageSelector />
       </header>
       <h2>{t('chooseSeeds')}</h2>
-      <div className="d-flex wrap gap-m">
+      <div className="d-flex wrap justify-center gap-m">
         {db.map(({ scale, ids }) => (
           <div key={scale}>
             <span style={{ display: 'inline-block', margin: '0.3em 0' }}>

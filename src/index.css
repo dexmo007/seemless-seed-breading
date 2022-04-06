@@ -39,6 +39,9 @@ input {
 .d-flex.gap-m > :not(:last-child) {
   margin-right: 1em;
 }
+.d-flex.justify-center {
+  justify-content: center;
+}
 
 td,
 th {

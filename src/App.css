@@ -8,9 +8,20 @@
   flex-direction: column;
   align-items: center;
 }
-.LanguageSelector.flag {
-  cursor: pointer;
+.LanguageSelector {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
 }
-.LanguageSelector.flag:not(:last-child) {
+.LanguageSelector .flag {
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 175ms ease-in-out;
+}
+.LanguageSelector .flag:not(:last-child) {
   margin-right: 0.4em;
+}
+
+.LanguageSelector .flag.active {
+  opacity: 1;
 }
